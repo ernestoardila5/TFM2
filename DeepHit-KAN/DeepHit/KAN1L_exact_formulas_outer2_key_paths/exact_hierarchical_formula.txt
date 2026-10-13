@@ -1,0 +1,11 @@
+EXACT HIERARCHICAL FORM — OUTER 2
+s_k(x) = A^S_k * SUM_i phi^S_(i,k)(u_i) + B^S_k
+c_j(x) = A^C_j * [SUM_i phi^C_(i,j)(u_i) + SUM_k psi^C_(k,j)(s_k(x))] + B^C_j
+z_t(x) = b_t + SUM_j W_(t,j)c_j(x)
+F_h(x) = SUM_(t<=h) exp(z_t(x)) / SUM_s exp(z_s(x))
+
+Selected dominant routes:
+  age -> c27 -> F_h
+  age -> s41 -> c19 -> F_h
+  NPI -> c9 -> F_h
+  NPI -> s41 -> c19 -> F_h

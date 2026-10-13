@@ -1,0 +1,3 @@
+input_type,n_edges,sum_activity_sd,mean_activity_sd,max_activity_sd,sum_mean_abs
+original_feature,79,2.988905,0.03783424,0.11925512,1.5823053
+shared_output,64,1.1832641,0.018488502,0.049278997,0.94858456

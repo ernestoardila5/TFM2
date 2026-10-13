@@ -1,0 +1,16 @@
+OUTER 2 — DOMINANT PATH TRACE INTO CS NODE 9
+
+Top direct path:
+    histological -> c9 -> CIF
+
+Top shared-input path into c9:
+    int_clust_memb.4
+      -> shared_output_8
+      -> c9
+      -> CIF
+
+Important:
+    The path-specific derivatives reported here are not the total
+    derivative of the source feature with respect to CIF, because a
+    source feature can reach the output through many other shared and
+    CS nodes simultaneously.

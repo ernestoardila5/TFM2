@@ -1,0 +1,57 @@
+EXACT LEARNED KAN EDGE FORMULA
+================================================================================
+Outer: 2
+Feature: age_at_diagnosis
+Feature index: 0
+Cause-specific output/subnode index: 17
+k (B-spline degree): 3
+Base function: silu
+Development edge-activity SD: 0.09626043588
+
+RAW-TO-NORMALIZED INPUT:
+u = (age - (60.2617679558)) / (13.0787860803)
+
+EXACT EDGE FORM:
+phi_age,node(age) = mask * [scale_base * base_fun(u) + scale_sp * S_k(u)]
+
+mask       = 1
+scale_base = -0.163427755237
+scale_sp   = 0.208332598209
+
+where
+S_3(u) = SUM_r c_r * B_(r,3)(u)
+
+Expanded B-spline representation:
+S_3(u) = +0.03899017349*B_0,3(u) +0.04489133507*B_1,3(u) +0.007939661853*B_2,3(u) -0.02374186367*B_3,3(u) +0.0476834476*B_4,3(u) +0.0905238688*B_5,3(u) +0.06798873842*B_6,3(u) +0.04455317557*B_7,3(u) +0.02217576839*B_8,3(u) +0.04602492228*B_9,3(u) +0.02361640148*B_10,3(u) -0.01018294785*B_11,3(u) -0.02010729164*B_12,3(u) -0.05171009898*B_13,3(u) -0.06028295308*B_14,3(u) -0.09179273993*B_15,3(u) -0.120748736*B_16,3(u) -0.06772346795*B_17,3(u)
+
+CORE KNOTS IN RAW AGE SCALE:
+[30.530001, 39.989999, 43.19    , 47.68    , 50.51    , 54.16    ,
+ 57.27    , 59.18    , 62.39    , 63.92    , 66.88    , 69.27    ,
+ 71.49    , 75.18    , 79.419999, 90.08    ]
+
+FULL EXTENDED KNOT VECTOR IN NORMALIZED SCALE:
+[-3.18391681, -2.88037181, -2.57682681, -2.27328181, -1.54997325,
+ -1.30530214, -0.96199816, -0.74561721, -0.46653932, -0.22874966,
+ -0.08271165,  0.16272397,  0.27970731,  0.506028  ,  0.68876666,
+  0.85850722,  1.14064348,  1.46483254,  2.27989292,  2.58343792,
+  2.88698292,  3.19052792]
+
+FULL EXTENDED KNOT VECTOR IN RAW AGE SCALE:
+[ 18.620001,  22.590001,  26.560001,  30.530001,  39.989999,  43.19    ,
+  47.68    ,  50.51    ,  54.16    ,  57.27    ,  59.18    ,  62.39    ,
+  63.92    ,  66.88    ,  69.27    ,  71.49    ,  75.18    ,  79.419999,
+  90.08    ,  94.05    ,  98.02    , 101.99    ]
+
+EXACT RECONSTRUCTION CHECK:
+max |manual - KANLayer.forward| = 2.980232238770e-08
+mean |manual - KANLayer.forward| = 4.303839229447e-10
+
+POST-SUM AFFINE PARAMETERS FOR THIS CS NODE:
+subnode_scale = 1.0
+subnode_bias  = 0.0
+node_scale    = 1.0
+node_bias     = 0.0
+
+IMPORTANT:
+This is the exact checkpoint representation in the learned B-spline basis.
+It is NOT yet a simplified symbolic approximation.

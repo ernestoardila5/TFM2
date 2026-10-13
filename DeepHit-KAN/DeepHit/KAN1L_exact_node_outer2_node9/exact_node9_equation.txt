@@ -1,0 +1,36 @@
+EXACT OUTER-2 CS NODE 9
+
+Inputs:
+    q = [x_normalized, shared(x)]
+    dim(q) = 143
+    original inputs = 79
+    shared outputs = 64
+
+Each numerical KAN edge is:
+
+    phi_i,9(q_i)
+      = mask_i,9 * [
+          scale_base_i,9 * SiLU(q_i)
+          + scale_sp_i,9
+            * SUM_r c_(i,9,r) B_(r,k)(q_i)
+        ]
+
+The pre-affine additive node is:
+
+    r_9(q)
+      = SUM_i phi_i,9(q_i)
+
+For this trained checkpoint:
+
+    subnode transform:
+      r_tilde = (1.0) * r_9 + (0.0)
+
+    final node transform:
+      c_9 = (1.0) * r_tilde + (0.0)
+
+The CSV file node9_incoming_edges_ranked.csv gives the 143
+incoming edge functions ranked by their observed activity SD
+on the OUTER-2 development patients.
+
+The file node9_CIF_sensitivity.csv gives the downstream local
+sensitivity dF_h/dc_9 at h = 144, 288, 432.

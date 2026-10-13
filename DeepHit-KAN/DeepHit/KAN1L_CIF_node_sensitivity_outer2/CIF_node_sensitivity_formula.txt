@@ -1,0 +1,27 @@
+CS-NODE SENSITIVITY TO THE DEEPHIT CIF
+
+For one-event DeepHit:
+
+    z_s(x) = b_s + SUM_j W_(s,j) c_j(x)
+
+    p_s(x) = exp(z_s) / SUM_r exp(z_r)
+
+    F_h(x) = SUM_(tau <= h) p_tau(x)
+
+The exact local derivative of the CIF with respect to CS node c_j is:
+
+    dF_h/dc_j
+      = SUM_(tau <= h) p_tau W_(tau,j)
+        - F_h SUM_s p_s W_(s,j)
+
+This is NOT the same as looking only at W_(h,j)c_j.
+The CIF at horizon h depends on all probabilities up to h and,
+through the softmax denominator, on all discrete-time logits.
+
+For ranking nodes on a comparable observed scale, this script uses:
+
+    standardized_sensitivity_rms(j,h)
+      = SD_dev(c_j) *
+        sqrt( mean_dev[ (dF_h/dc_j)^2 ] )
+
+This remains a local model-sensitivity measure, not a causal effect.

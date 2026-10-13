@@ -1,0 +1,70 @@
+EXACT HIERARCHICAL DEEPHIT-KAN EQUATION — OUTER 2
+================================================================================
+
+INPUT NORMALIZATION
+For each original feature i:
+    u_i = (x_i - offset_i) / scale_i
+
+SHARED KAN
+There are 64 additive Shared-KAN outputs and no multiplication nodes.
+
+For j = 0,...,63:
+    r^S_j(u) = SUM_i phi^S_(i,j)(u_i)
+
+    phi^S_(i,j)(v)
+      = mask^S_(i,j) * [
+            scale_base^S_(i,j) * SiLU(v)
+          + scale_sp^S_(i,j) * SUM_r c^S_(i,j,r) B^S_(i,r,k)(v)
+        ]
+
+    subnode^S_j = subnode_scale^S_j * r^S_j + subnode_bias^S_j
+    s_j          = node_scale^S_j * subnode^S_j + node_bias^S_j
+
+CAUSE-SPECIFIC INPUT
+    q = [u_0,...,u_78, s_0,...,s_63]
+
+CAUSE-SPECIFIC KAN
+There are 32 additive CS-KAN outputs and no multiplication nodes.
+
+For m = 0,...,31:
+    r^C_m(q) = SUM_i phi^C_(i,m)(q_i)
+
+    phi^C_(i,m)(v)
+      = mask^C_(i,m) * [
+            scale_base^C_(i,m) * SiLU(v)
+          + scale_sp^C_(i,m) * SUM_r c^C_(i,m,r) B^C_(i,r,k)(v)
+        ]
+
+    subnode^C_m = subnode_scale^C_m * r^C_m + subnode_bias^C_m
+    c_m          = node_scale^C_m * subnode^C_m + node_bias^C_m
+
+FINAL LINEAR LAYER
+For each discrete time t = 0,...,11060:
+    z_t(x) = b_t + SUM_(m=0)^31 W_(t,m) c_m(x)
+
+SOFTMAX — SINGLE EVENT METABRIC
+    p_t(x) = exp(z_t(x)) / SUM_(s=0)^11060 exp(z_s(x))
+
+CIF
+    F(t|x) = SUM_(tau=0)^t p_tau(x)
+
+NUMERICAL RECONSTRUCTION ERRORS
+    Shared KAN max error = 0.000000000000e+00
+    Shared KAN mean error = 0.000000000000e+00
+
+    CS KAN max error = 0.000000000000e+00
+    CS KAN mean error = 0.000000000000e+00
+
+    Logits max error = 0.000000000000e+00
+    Logits mean error = 0.000000000000e+00
+
+    Softmax probabilities max error = 0.000000000000e+00
+    Softmax probabilities mean error = 0.000000000000e+00
+
+    CIF max error = 0.000000000000e+00
+    CIF mean error = 0.000000000000e+00
+
+NODE 17 IN FINAL LINEAR LAYER
+time 144: node 17 | W=-0.0142722530 | rank=31/32 | mean_abs_contribution=0.0113963149 | sd=0.0125575531
+time 288: node 17 | W=-0.0030372289 | rank=31/32 | mean_abs_contribution=0.0024252108 | sd=0.0026723295
+time 432: node 17 | W=-0.0343350545 | rank=6/32 | mean_abs_contribution=0.0274163522 | sd=0.0302099641

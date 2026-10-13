@@ -1,0 +1,5 @@
+node,subnode_scale,subnode_bias,node_scale,node_bias,collapsed_A,collapsed_B
+s41,1.0,0.0,1.0,0.0,1.0,0.0
+c9,1.0,0.0,1.0,0.0,1.0,0.0
+c19,1.0,0.0,1.0,0.0,1.0,0.0
+c27,1.0,0.0,1.0,0.0,1.0,0.0

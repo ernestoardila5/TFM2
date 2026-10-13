@@ -1,0 +1,29 @@
+FROM floydhub/dl-docker:cpu
+
+RUN pip install https://github.com/Lasagne/Lasagne/archive/master.zip
+
+RUN pip install \
+    numpy==1.13.3 \
+    scipy==0.19.1 \
+    pandas==0.20.3
+
+RUN pip install \
+    cycler==0.10.0 \
+    python-dateutil==2.6.1 \
+    six==1.11.0 \
+    h5py==2.7.0 \
+    lifelines==0.9.4 \
+    logger==1.4 \
+    tensorboard-logger==0.0.3 \
+    matplotlib==2.0.0 \
+    protobuf==3.4.0
+
+COPY . /
+
+CMD [ "python", "-u", "/scripts/deepsurv_run.py", \
+"metabric", \
+"/models/metabric_model_selu_revision.0.json", \
+"/shared/data/metabric_IHC4_clinical_train_test.h5", \
+"--update_fn", "adam", \
+"--results_dir", "/shared/results/", \
+"--num_epochs", "500"]
